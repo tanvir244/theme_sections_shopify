@@ -1,0 +1,122 @@
+<style>
+    .dm-sans {
+        font-family: "DM Sans", sans-serif;
+    }
+    
+    .museomoderno {
+        font-family: "MuseoModerno", sans-serif;
+    }
+    
+    .poppins {
+        font-family: "Poppins", sans-serif;
+    }
+    
+    .dropdown-button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+    
+    .dropdown-button i {
+        margin-left: 14px;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 126%;
+        text-align: left;
+        background-color: white;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
+
+    <!-- header -->
+    <header class="bg-[#121316] text-white">
+        <div class="container mx-auto px-2 py-2 flex justify-between items-center">
+        <div class="space-x-2">
+            <a href="#" class="text-2xl font-bold museomoderno"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="text-2xl font-bold museomoderno"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="#" class="text-2xl font-bold museomoderno"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+       <div>
+        <h1 class="poppins text-white font-medium">New customers 10% off with WELCOME</h1>
+
+       </div>
+          <div class="flex items-center gap-6">
+         <div class="flex items-center gap-4"><i class="fa-solid fa-store"></i> <h1 class="text-sm text-white poppins font-medium">Stores</h1></div>
+         
+         <div class="flex items-center gap-4"><i class="fa-solid fa-earth-americas"></i><h1 class="text-sm text-white poppins font-medium">English (US)</h1></div>
+          </div>
+        </div>
+      </header>
+
+
+        <!-- navbar -->
+    <header class="bg-white text-white">
+        
+
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-[#192434] museomoderno">{{ shop.name }}</a>
+     
+            <div class="flex items-center gap-2">
+                <div class="flex items-center">
+                    <div class="relative">
+                        <input type="text" placeholder="Find my Product" class="bg-white border border-[#1C304A85] dm-sans text-[#1C304A85] px-4 py-3 text-base rounded-full">
+                        <button class="absolute top-3 right-4 bg-white  text-[#1C304A85] rounded-full">
+                          <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                      </div>
+                    <div class="w-0.5 h-7 bg-[#969696] mx-4"></div>
+                    <a href="{{ routes.account_login_url }}"
+                        class="w-10 h-10 rounded-full  border border-[#42526E]  flex items-center justify-center">
+                        <i class="fa-solid fa-user text-[#42526E]"></i>
+                    </a>
+                    <div class="w-0.5 h-7 bg-[#969696] mx-4"></div>
+                    <a href="{{ routes.cart_add_url }}" class="w-10 h-10 rounded-full bg-white border border-[#42526E] flex items-center justify-center">
+                        <i class="fa-solid fa-bag-shopping text-[#42526E]"></i>
+                    </a>
+                </div>
+
+
+            </div>
+
+
+           
+
+
+
+
+        </div>
+    </header>
+    <header class="bg-[#DBE112]">
+       <div class="container mx-auto px-4 py-6 flex justify-center items-center">
+        <nav class="hidden text-[#192739F0] md:flex space-x-14 dm-sans">
+                {% for link in linklists.main-menu.links %}
+                    {% if link.links != blank %}
+                        <div class="dropdown">
+                            <button class="dropdown-button">{{ link.title }} <i class="fa-solid fa-caret-down"></i>
+                            
+                                <ul class="dropdown-content top-[148%] items-start">
+                                    {% for childlink in link.links %}
+                                    <li>{{ childlink.title }}</li>
+                            {% endfor %}
+                                
+                                </ul>    
+                            </button>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+        </nav>
+       </div>
+    </header>

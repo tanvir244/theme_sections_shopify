@@ -1,0 +1,306 @@
+<style>
+    /* --------- Universal CSS ------------------ */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+    display: inline-block;
+}
+img{
+    vertical-align: middle;
+}
+h1,h2,h3,h4,h5,h6,a,p,i,div{
+    margin: 0;
+    padding: 0;
+    color: #282938;
+}
+
+/* --------- Universal CSS ------------------ */
+
+.group:hover .group-hover\:block {
+      display: block;
+    }
+    .logo{
+      font-family: "MuseoModerno", sans-serif;;
+    }
+    .menuFont{
+      font-family: "Poppins", sans-serif;
+    }
+.top-bar{
+    background-color: #192434;
+}
+
+.swiper-slide {
+    flex-shrink: 0;
+    width: 130px !important;
+    height: 160px !important;
+    position: relative;
+    transition-property: transform;
+    display: block;
+}
+p {
+    font-size: 10px;
+    text-align: center;
+}
+
+
+.swiper {
+    width: 550px;
+    overflow: hidden !important;
+    display: flex !important;
+    margin: 0 !important;
+}
+
+.swiper-wrapper {
+    display: flex;
+    overflow: hidden;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.video-container video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    transform: translate(-50%, -50%);
+}
+
+.phoneMenu{
+    display: none;
+}
+.phoneLogo{
+    color: #ffffff;
+}
+.iconWhite{
+  color:#ffffff !important;
+}
+
+
+/* ------------- Responsiveness -------------------- */
+
+@media(max-width:990px){
+    .pcMenu{
+        display: none;
+    }
+    .phoneMenu{
+        display: block;
+    }
+    .phoneLogo h3{
+        color: #ffffff;
+    }
+    .phoneMenubar{
+        color: #ffffff;
+        padding: 15px 0;
+    }
+}
+
+@media(max-width:1166px){
+    .menuBox{
+        column-gap: 15px;
+}
+}
+
+@media(min-width:1167px){
+    .menuBoxMan{
+       column-gap: 45px;
+    }
+    .menuBox{
+        column-gap: 75px;
+     }
+     #topBar p{
+        font-size: 13px;
+     }
+}
+@media(min-width:1320px){
+    .menuBoxMan{
+       column-gap: 85px;
+    }
+    .menuBox{
+        column-gap: 85px;
+     }
+}
+
+@media(min-width:1464px){
+    .menuBoxMan{
+       column-gap: 100px;
+    }
+    .menuBox{
+        column-gap: 100px;
+     }
+}
+
+@media(min-width:1800px){
+    .menuBoxMan{
+       column-gap: 150px;
+    }
+    .menuBox{
+        column-gap: 150px;
+     }
+}
+
+/* ------------- Responsiveness -------------------- */
+</style>
+
+
+
+<div class="bg-gray-800 relative w-full h-screen p-0 m-0">
+
+      <!-- ---------------- Top Bar Markup Start --------------------------- -->
+
+  <div id="topBar" class="top-bar w-full py-2 flex justify-center items-center relative">
+    <div class="container w-full flex justify-between items-center">
+      <div class="topLeft flex justify-center items-center gap-x-6 text-white cursor-pointer">
+        <i class="fa-brands fa-facebook iconWhite"></i>
+        <i class="fa-brands fa-linkedin iconWhite"></i>
+        <i class="fa-brands fa-x-twitter iconWhite"></i>
+      </div>
+      <div class="topMiddle text-white">
+        <p class="text-white menuFont">Save 10% Now — Welcome Code: WELCOME</p>
+      </div>
+      <div class="topRight flex justify-between items-center gap-x-4 cursor-pointer">
+        <div class="flex justify-between items-center text-white gap-x-2">
+          <i class="fa-solid fa-store iconWhite"></i>
+          <p class="text-white menuFont">Store</p>
+        </div>
+        <div class="flex justify-between items-center text-white gap-x-2">
+          <i class="fa-solid fa-earth-americas iconWhite"></i>
+          <p class="text-white menuFont">English (US)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ---------------- Top Bar Markup End --------------------------- -->
+
+  <!-- ---------------- Header Section Markup Start --------------------------- -->
+
+  <div class="video-container">
+
+    <header class="bg-transparent mainHeader absolute w-full z-10 pcMenu">
+      <div class="container mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <div class="text-xl font-bold logo"><h1 class="text-white liHover">{{ shop.name }}</h1></div>
+  
+        <!-- Navigation -->
+        <nav>
+  <ul class="flex space-x-8 navUl">
+    {% for link in linklists.main-menu.links %}
+      {% if link.links != blank %}
+        <li class="relative group py-4">
+          <a href="{{ link.url }}" class="hover:text-gray-600 text-white flex justify-center items-center gap-x-4 menuFont liHover">
+            {{ link.title }} 
+            <i class="fa-sharp fa-solid fa-angle-down text-white iconWH"></i>
+          </a>
+          <div class="fixed rounded-b-3xl w-screen left-0 mt-2 hidden group-hover:block bg-white shadow-lg p-6 border-t-2 py-10">
+              <div class="flex justify-center items-start menuBox menuFont">
+                <div class="mr-6">
+                    <ul class="grid grid-cols-3 items-start justify-between bg-[#d3d3d3] py-8 px-16 rounded-md gap-y-2">
+                        {% for childlink in link.links %}
+                          <li class="pr-8"><a href="{{ childlink.url }}" class="block py-1 hover:bg-gray-100">{{ childlink.title }}</a></li>
+                        {% endfor %}
+                      </ul>                      
+                </div>
+              </div>
+          </div>
+        </li>
+      {% else %}
+        <li class="relative group py-4">
+          <a href="{{ link.url }}" class="hover:text-gray-600 text-white flex justify-center items-center gap-x-4 menuFont liHover">
+            {{ link.title }}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>
+
+  
+        <!-- Icons -->
+        <div class="flex">
+          <a href="#" class="hover:text-gray-600 border-r pr-6"><i class="fa-light fa-magnifying-glass text-white liHover"></i></a>
+          <a href="#" class="hover:text-gray-600 text-white border-r pr-6 pl-6"><i class="fa-sharp fa-light fa-heart text-white liHover"></i><a> 
+          <a href="#" class="hover:text-gray-600 text-white border-r pr-6 pl-6"><i class="fa-light fa-user text-white liHover"></i></a>
+          <a href="#" class="hover:text-gray-600 text-white pl-6"><i class="fa-light fa-bag-shopping text-white liHover"></i></a>
+        </div>
+      </div>
+    </header>
+
+    <header class="bg-transparent mainHeader absolute w-full z-10 phoneMenu ">
+      <div class="container mx-auto px-4 flex justify-between items-center">
+        <div class="text-lg font-bold logo"><h1 class="text-white liHover phoneLogo">{{ shop.name }}</h1></div>
+        <h3 class="phoneMenubar"><i class="fa-solid fa-bars-staggered text-white"></i></h3>
+      </div>
+    </header>
+  
+    <video class="absolute w-full h-full top-0 left-0 object-cover" width="100%" autoplay>
+      <source src="https://streamable.com/ow4ni1" type="video/mp4">
+
+    </video>
+        
+       <div style="position:relative; width:100%; height:0px; padding-bottom:56.250%"><iframe allow="fullscreen;autoplay" allowfullscreen height="100%" src="https://streamable.com/e/ow4ni1?autoplay=1&loop=0&muted=1&nocontrols=1" width="100%" style="border:none; width:100%; height:100%; position:absolute; left:0px; top:0px; overflow:hidden;"></iframe></div> 
+
+</div>
+
+  <!-- ---------------- Header Section Markup End --------------------------- -->
+
+  </div>
+
+
+
+
+<script>
+    const navUl = document.querySelector('.navUl');
+    const mainHeader = document.querySelector('.mainHeader');
+    const liHover = document.querySelectorAll('.liHover');
+    const iconWH = document.querySelectorAll('.iconWH');
+
+    navUl.addEventListener('mouseover', () => {
+      mainHeader.style.backgroundColor = 'white';
+      liHover.forEach(item => {
+        item.style.color = 'black';
+      });
+       iconWH.forEach(item => {
+        item.style.color = 'black';
+      });
+    });
+
+    navUl.addEventListener('mouseout', () => {
+      mainHeader.style.backgroundColor = 'transparent';
+      liHover.forEach(item => {
+        item.style.color = 'white';
+      });
+      iconWH.forEach(item => {
+        item.style.color = 'white';
+      });
+    });
+
+
+    /*
+    todo: Swiper slider js function implement
+    */  
+
+    const swiper = new Swiper('.swiper', {
+    loop: true, // Enable looping
+    centeredSlides: false,
+    slidesPerView: 2,
+    spaceBetween: 10,
+    navigation: {
+        nextEl: '.swiper-next',
+        prevEl: '.swiper-prev',
+    },
+});
+
+</script>
