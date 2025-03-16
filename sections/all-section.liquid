@@ -1,0 +1,227 @@
+<img width="{{ settings.logo_width }}" src="{{ settings.deafult_logo | image_url }}" class="logo" alt="">
+
+
+
+<section class="p-6  text-base-content bg-yellow-300 ">
+    {{ test }}
+   
+  <div class="container mx-auto flex flex-col gap-6">
+    <!-- Article -->
+    <div class="prose">
+      <h2>{{ section.settings.article | default: 'Example Article' }}</h2>
+    </div>
+
+    <!-- Blog -->
+    <div class="prose">
+      <h2>{{ section.settings.blog | default: 'Example Blog' }}</h2>
+    </div>
+
+    <!-- Checkbox -->
+    {% if section.settings.checkbox %}
+      <div class="prose">
+        <p>Checkbox is enabled.</p>
+      </div>
+    {% endif %}
+
+    <!-- Collection -->
+    <div class="prose">
+      <h2>Collection: {{ section.settings.collection }}</h2>
+    </div>
+
+    <!-- Collection List -->
+    <div class="prose">
+      <h2>Collections List</h2>
+      <ul>
+        {% for collection in section.settings.collection_list %}
+          <li>{{ collection.title }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Color -->
+    <div class="w-full h-16" style="background-color: {{ section.settings.color }};">
+      <p>Color Example</p>
+    </div>
+
+    <!-- Color Background -->
+    <div class="w-full h-16 bg-{{ section.settings.color_background }}">
+      <p>Color Background Example</p>
+    </div>
+
+    <!-- Color Scheme -->
+    <div class="text-{{ section.settings.color_scheme }}">
+      <p>Color Scheme: {{ section.settings.color_scheme }}</p>
+    </div>
+
+    <!-- Font Picker -->
+    <div style="font-family: {{ section.settings.font_picker }}">
+      <p>Font Picker: {{ section.settings.font_picker }}</p>
+    </div>
+
+    <!-- Header -->
+    <header class="prose">
+      <h2>{{ section.settings.header }}</h2>
+    </header>
+
+    <!-- HTML -->
+    <div class="prose">
+      {{ section.settings.html }}
+    </div>
+
+    <!-- Image Picker -->
+    {% if section.settings.image_picker != blank %}
+      <img src="{{ section.settings.image_picker | img_url: 'large' }}" alt="Picked Image">
+    {% endif %}
+
+    <!-- Inline Rich Text -->
+    <div class="prose">
+      {{ section.settings.inline_richtext }}
+    </div>
+
+    <!-- Link List -->
+    <ul>
+      {% for link in section.settings.link_list.links %}
+        <li>
+          <a href="{{ link.url }}" class="text-primary">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <!-- Liquid -->
+    <div class="prose">
+      {{ section.settings.liquid }}
+    </div>
+
+    <!-- Metaobject -->
+    <div class="prose">
+      <p>Metaobject: {{ section.settings.metaobject }}</p>
+    </div>
+
+    <!-- Metaobject List -->
+    <ul>
+      {% for meta in section.settings.metaobject_list %}
+        <li>{{ meta.title }}</li>
+      {% endfor %}
+    </ul>
+
+    <!-- Number -->
+    <p>Number: {{ section.settings.number }}</p>
+
+    <!-- Page -->
+    <p>Selected page: {{ section.settings.page }}</p>
+
+    <!-- Paragraph -->
+    <div class="prose">
+      <p>{{ section.settings.paragraph }}</p>
+    </div>
+
+    <!-- Product -->
+    <p>Selected product: {{ section.settings.product }}</p>
+
+    <!-- Product List -->
+    <ul>
+      {% for product in section.settings.product_list %}
+        <li>{{ product.title }}</li>
+      {% endfor %}
+    </ul>
+
+    <!-- Radio -->
+    <p>Selected option: {{ section.settings.radio }}</p>
+
+    <!-- Range -->
+    <p>Range value: {{ section.settings.range }}</p>
+
+    <!-- Richtext -->
+    <div class="prose">
+      {{ section.settings.richtext }}
+    </div>
+
+    <!-- Select -->
+    <p>Selected option: {{ section.settings.select }}</p>
+
+    <!-- Text -->
+    <p>Text: {{ section.settings.text }}</p>
+
+    <!-- Text Alignment -->
+    <div class="text-{{ section.settings.text_alignment }}">
+      <p>Text Alignment</p>
+    </div>
+
+    <!-- Textarea -->
+    <p>Textarea content: {{ section.settings.textarea }}</p>
+
+    <!-- URL -->
+    <a href="{{ section.settings.url }}" class="text-primary">URL Link</a>
+
+    <!-- Video -->
+    {% if section.settings.video != blank %}
+      <video controls src="{{ section.settings.video }}"></video>
+    {% endif %}
+
+    <!-- Video URL -->
+    <iframe src="{{ section.settings.video_url }}" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "All Input Types Example",
+  "settings": [
+    { "type": "header", "content": "Section Header" },
+    { "type": "paragraph", "content": "This is a paragraph" },
+    { "type": "article", "id": "article", "label": "Article" },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "checkbox", "id": "checkbox", "label": "Checkbox" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "collection_list", "id": "collection_list", "label": "Collection List" },
+    { "type": "color", "id": "color", "label": "Color" },
+    { "type": "color_background", "id": "color_background", "label": "Color Background" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color Scheme" },
+
+    { "type": "html", "id": "html", "label": "HTML" },
+    { "type": "image_picker", "id": "image_picker", "label": "Image Picker" },
+    { "type": "inline_richtext", "id": "inline_richtext", "label": "Inline Rich Text" },
+    { "type": "link_list", "id": "link_list", "label": "Link List" },
+    { "type": "liquid", "id": "liquid", "label": "Liquid" },
+    { "type": "metaobject", "id": "metaobject", "label": "Metaobject", "metaobject_type": "custom_metaobject" },
+    {
+      "type": "metaobject_list",
+      "id": "metaobject_list",
+      "label": "Metaobject List",
+      "metaobject_type": "custom_metaobject"
+    },
+    { "type": "number", "id": "number", "label": "Number", "default": 1 },
+    { "type": "page", "id": "page", "label": "Page" },
+
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "product_list", "id": "product_list", "label": "Product List" },
+    {
+      "type": "radio",
+      "id": "radio",
+      "label": "Radio",
+      "options": [
+        { "label": "Option 1", "value": "option1" },
+        { "label": "Option 2", "value": "option2" }
+      ]
+    },
+    { "type": "range", "id": "range", "label": "Range", "default": 50, "min": 0, "max": 100 },
+    { "type": "richtext", "id": "richtext", "label": "Richtext" },
+    {
+      "type": "select",
+      "id": "select",
+      "label": "Select",
+      "options": [
+        { "label": "Option 1", "value": "option1" },
+        { "label": "Option 2", "value": "option2" }
+      ]
+    },
+    { "type": "text", "id": "text", "label": "Text", "default": "Sample text" },
+    { "type": "text_alignment", "id": "text_alignment", "label": "Text Alignment", "default": "left" },
+    { "type": "textarea", "id": "textarea", "label": "Textarea", "default": "Sample text area" },
+    { "type": "url", "id": "url", "label": "URL" },
+    { "type": "video", "id": "video", "label": "Video" },
+    { "type": "video_url", "id": "video_url", "label": "Video URL", "accept": ["youtube", "vimeo"] }
+  ],
+  "presets": [{ "name": "All Section Types Example" }]
+}
+{% endschema %}

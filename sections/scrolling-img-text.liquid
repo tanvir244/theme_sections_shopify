@@ -1,0 +1,287 @@
+<style>
+  .image_comparision {
+    max-width: 100%;
+    margin: 40px auto;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .image_comparision img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+  }
+  .image_comparision .image_container {
+    position: relative;
+    display: flex;
+  }
+  .image_comparision .image_container .before_image {
+    position: absolute;
+    top: 0;
+    width: 50%;
+  }
+  .image_comparision .slider {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+  .image_comparision .slider-line {
+    position: absolute;
+    height: 100%;
+    width: 4px;
+    background: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .image_comparision .slider-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+
+    /*
+
+   width: 120px; 
+   height: 60px; 
+*/
+    color: #fff;
+    transform: translate(-50%, -50%) rotateZ(90deg);
+  }
+</style>
+
+
+<div class="min-h-screen bg-[#f4f4f4] flex flex-col items-center">
+  <div class="pt-16">
+    <div class="w-[90%] md:w-[750px] text-center pb-10 mx-auto">
+      {% for block in section.blocks %}
+        {% if block.type == "subheading" %}
+          <p class="text-xl text-[#192434]">{{ block.settings.subheading }}</p>
+        {% elsif block.type == "heading" %}
+          <h2 class="text-4xl md:text-6xl text-[#192434] pb-6 font-bold uppercase mt-2">{{ block.settings.header }}
+            <span style="-webkit-text-stroke: 1.3px #192434; color: transparent;"></span>
+          </h2>
+        {% elsif block.type == "text_block" %}
+          <p class="text-xl text-[#192434]">{{ block.settings.description }}</p>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="w-[90%] mx-auto">
+      <div class="image_comparision">
+        <div class="image_container">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'before_image' %}
+                <img
+                  class="before_image"
+                  src="{{ block.settings.before_image | default: 'https://i.ibb.co/xGG0Z92/before-image.png' }}"
+                  alt="Before Image">
+              {% when 'after_image' %}
+                <img
+                  class="after_image"
+                  src="{{ block.settings.after_image | default: 'https://i.ibb.co/XznmGt1/after-image.png' }}"
+                  alt="After Image">
+                <div class="slider-line"></div>
+                <div class="slider-icon bg-white p-2 rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="black"
+                    class="size-16">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                  </svg>
+                </div>
+                <input
+              type="range"
+              class="slider"
+              min="0"
+              max="100">
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+    const slider = document.querySelector(".image_comparision .slider");
+  const beforeImage = document.querySelector(".image_comparision .before_image");
+  const sliderLine = document.querySelector(".image_comparision .slider-line");
+  const sliderIcon = document.querySelector(".image_comparision .slider-icon");
+  
+  slider.addEventListener("input", (e) => {
+    let sliderValue = e.target.value + "%";
+    beforeImage.style.width = sliderValue;
+    sliderLine.style.left = sliderValue;
+    sliderIcon.style.left = sliderValue;
+  })
+</script>
+{% schema %}
+  {
+    "name": "Rich Text",
+    "tag": "section",
+    "class": "rich_text",
+    "limit": 2,
+    "settings": [
+      {
+        "type": "select",
+        "id": "content_position",
+        "label": "Content Position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "select",
+        "id": "content_alignment",
+        "label": "Content Alignment",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          }, {
+            "value": "center",
+            "label": "Center"
+          }, {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "default": "scheme_1",
+        "label": "Color Scheme"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Full Width",
+        "default": true
+      }, {
+        "type": "header",
+        "content": "Padding"
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 10,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Top",
+        "default": 16
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 10,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Padding Bottom",
+        "default": 16
+      }
+    ],
+    "max_blocks": 6,
+    "blocks": [
+      {
+        "name": "Sub heading",
+        "type": "subheading",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "subheading",
+            "label": "Sub heading",
+            "default": "<p>Latest Fashion Demand</p>"
+          }
+        ]
+      },
+      {
+        "name": "Heading",
+        "type": "heading",
+        "settings": [
+          {
+            "type": "text",
+            "id": "header",
+            "label": "Header",
+            "default": "Header"
+          }
+        ]
+      },
+      {
+        "name": "Text",
+        "type": "text_block",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "description",
+            "label": "Text",
+            "default": "<p>Our latest collection of fashion item offers something special for every occasion. Our festival and casual outfits ensure you are prepared for anything.</p>"
+          }
+        ]
+      },
+      {
+        "name": "Before Image",
+        "type": "before_image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "before_image",
+            "label": "Before Image"
+          }
+        ]
+      }, {
+        "name": "After Image",
+        "type": "after_image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "after_image",
+            "label": "After Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Rich Text",
+        "blocks": [
+          {
+            "type": "subheading"
+          },
+          {
+            "type": "heading"
+          },
+          {
+            "type": "text_block"
+          },
+          {
+            "type": "before_image"
+          }, {
+            "type": "after_image"
+          }
+        ]
+      }
+    ],
+    "enabled_on": {
+      "templates": ["*"]
+    }
+  }
+{% endschema %}

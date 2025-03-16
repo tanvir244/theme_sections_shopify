@@ -1,0 +1,73 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "New Theme",
+    "theme_version": "1.0",
+    "theme_author": "Softvence",
+    "theme_documentation_url": "https://github.com/",
+    "theme_support_email": "softvence@gmail.com"
+  },
+  {
+    "name": "Logo",
+    "settings": [
+      { "type": "header", "content": "Logo" },
+      {
+        "type": "image_picker",
+        "id": "deafult_logo",
+        "label": "Deafult Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 100,
+        "max": 500,
+        "step": 10,
+        "unit": "px",
+        "label": "Logo Width",
+        "default": 100
+      }
+    ]
+  },
+
+  {
+    "name": "Typograpgy",
+    "settings": [
+      { "type": "header", "content": "Font " },
+      { "type": "paragraph", "content": "Font Related Schemas" },
+      {
+        "type": "font_picker",
+        "id": "deafult_heading_font",
+        "label": "Heading Font",
+        "default": "helvetica_n4"
+      },
+      { "type": "header", "content": "Font Size" },
+      { "type": "paragraph", "content": "Font Size Related Schemas" },
+      {
+        "type": "range",
+        "id": "heading_font_size",
+        "min": 24,
+        "max": 48,
+        "step": 4,
+        "unit": "px",
+        "label": "heading font size",
+        "default": 24
+      }
+    ]
+  },
+  {
+    "name": "Currency Format",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Currency Codes"
+      },
+      {
+        "type": "text",
+        "id": "currency_code_enabled",
+        "label": "Show currency codes",
+        "info": "Cart and checkout prices always show currency codes. Example: $1.00 USD.",
+        "default": "Here Will be a heading text"
+      }
+    ]
+  }
+]
