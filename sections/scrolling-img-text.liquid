@@ -1,287 +1,162 @@
 <style>
-  .image_comparision {
-    max-width: 100%;
-    margin: 40px auto;
-    border-radius: 20px;
+  .scrolling_text_img {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+  }
+  .slider {
+    height: 260px;
+    width: 90%;
     overflow: hidden;
-  }
-  .image_comparision img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: left;
-  }
-  .image_comparision .image_container {
     position: relative;
     display: flex;
   }
-  .image_comparision .image_container .before_image {
-    position: absolute;
-    top: 0;
-    width: 50%;
+  .slide_track {
+    display: flex;
+    width: calc(780px * 10);
+    /* Ensure space for duplicates */
+    animation: scroll 40s linear infinite;
   }
-  .image_comparision .slider {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
+  .slide {
+    display: flex;
+    gap: 34px;
+    width: 780px;
+    height: 260px;
+    align-items: center;
   }
-  .image_comparision .slider-line {
-    position: absolute;
+  .slide_img {
+    width: 360px;
+    height: 240px;
+    object-fit: cover;
+  }
+  .slide_img img {
+    width: 100%;
     height: 100%;
-    width: 4px;
-    background: #fff;
-    left: 50%;
-    transform: translateX(-50%);
+    border-radius: 8px;
   }
-  .image_comparision .slider-icon {
-    position: absolute;
-    left: 50%;
-    top: 50%;
+  .slide_text {
+    font-size: 38px;
+    font-weight: bold;
+  }
 
-
-    /*
-
-   width: 120px; 
-   height: 60px; 
-*/
-    color: #fff;
-    transform: translate(-50%, -50%) rotateZ(90deg);
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-780px * 5));
+      /* Move only half for looping */
+    }
   }
 </style>
 
 
-<div class="min-h-screen bg-[#f4f4f4] flex flex-col items-center">
-  <div class="pt-16">
-    <div class="w-[90%] md:w-[750px] text-center pb-10 mx-auto">
-      {% for block in section.blocks %}
-        {% if block.type == "subheading" %}
-          <p class="text-xl text-[#192434]">{{ block.settings.subheading }}</p>
-        {% elsif block.type == "heading" %}
-          <h2 class="text-4xl md:text-6xl text-[#192434] pb-6 font-bold uppercase mt-2">{{ block.settings.header }}
-            <span style="-webkit-text-stroke: 1.3px #192434; color: transparent;"></span>
-          </h2>
-        {% elsif block.type == "text_block" %}
-          <p class="text-xl text-[#192434]">{{ block.settings.description }}</p>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <div class="w-[90%] mx-auto">
-      <div class="image_comparision">
-        <div class="image_container">
-          {% for block in section.blocks %}
-            {% case block.type %}
-              {% when 'before_image' %}
-                <img
-                  class="before_image"
-                  src="{{ block.settings.before_image | default: 'https://i.ibb.co/xGG0Z92/before-image.png' }}"
-                  alt="Before Image">
-              {% when 'after_image' %}
-                <img
-                  class="after_image"
-                  src="{{ block.settings.after_image | default: 'https://i.ibb.co/XznmGt1/after-image.png' }}"
-                  alt="After Image">
-                <div class="slider-line"></div>
-                <div class="slider-icon bg-white p-2 rounded-full">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="black"
-                    class="size-16">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                  </svg>
-                </div>
-                <input
-              type="range"
-              class="slider"
-              min="0"
-              max="100">
-            {% endcase %}
-          {% endfor %}
+<section class="scrolling_text_img">
+  <div class="slider">
+    <div class="slide_track">
+      <!-- Duplicated slides for smooth looping -->
+      <div class="slide">
+        <div class="slide_img">
+          <img src="https://i.ibb.co.com/FHdcvXs/440330813-428100616481086-1539425588524193759-n.jpg" alt="">
         </div>
+        <h1 class="slide_text">Scrolling Text</h1>
+      </div>
+      <div class="slide">
+        <div class="slide_img">
+          <img src="https://i.ibb.co.com/FHdcvXs/440330813-428100616481086-1539425588524193759-n.jpg" alt="">
+        </div>
+        <h1 class="slide_text">Scrolling Text</h1>
+      </div>
+      <div class="slide">
+        <div class="slide_img">
+          <img src="https://i.ibb.co.com/FHdcvXs/440330813-428100616481086-1539425588524193759-n.jpg" alt="">
+        </div>
+        <h1 class="slide_text">Scrolling Text</h1>
+      </div>
+      <div class="slide">
+        <div class="slide_img">
+          <img src="https://i.ibb.co.com/FHdcvXs/440330813-428100616481086-1539425588524193759-n.jpg" alt="">
+        </div>
+        <h1 class="slide_text">Scrolling Text</h1>
+      </div>
+      <div class="slide">
+        <div class="slide_img">
+          <img src="https://i.ibb.co.com/FHdcvXs/440330813-428100616481086-1539425588524193759-n.jpg" alt="">
+        </div>
+        <h1 class="slide_text">Scrolling Text</h1>
       </div>
 
+      <!-- Duplicate slides for seamless effect -->
+      <div class="slide">
+        <div class="slide_img">
+          <img src="https://i.ibb.co.com/FHdcvXs/440330813-428100616481086-1539425588524193759-n.jpg" alt="">
+        </div>
+        <h1 class="slide_text">Scrolling Text</h1>
+      </div>
+      <div class="slide">
+        <div class="slide_img">
+          <img src="https://i.ibb.co.com/FHdcvXs/440330813-428100616481086-1539425588524193759-n.jpg" alt="">
+        </div>
+        <h1 class="slide_text">Scrolling Text</h1>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<script>
-    const slider = document.querySelector(".image_comparision .slider");
-  const beforeImage = document.querySelector(".image_comparision .before_image");
-  const sliderLine = document.querySelector(".image_comparision .slider-line");
-  const sliderIcon = document.querySelector(".image_comparision .slider-icon");
-  
-  slider.addEventListener("input", (e) => {
-    let sliderValue = e.target.value + "%";
-    beforeImage.style.width = sliderValue;
-    sliderLine.style.left = sliderValue;
-    sliderIcon.style.left = sliderValue;
-  })
-</script>
+
 {% schema %}
   {
-    "name": "Rich Text",
+    "name": "Scrolling Image-Text",
     "tag": "section",
-    "class": "rich_text",
+    "class": "scrolling_image_text",
     "limit": 2,
     "settings": [
       {
-        "type": "select",
-        "id": "content_position",
-        "label": "Content Position",
-        "options": [
-          {
-            "value": "left",
-            "label": "Left"
-          }, {
-            "value": "center",
-            "label": "Center"
-          }, {
-            "value": "right",
-            "label": "Right"
-          }
-        ],
-        "default": "center"
+        "type": "image_picker",
+        "id": "scrolling_image",
+        "label": "Image"
       },
       {
-        "type": "select",
-        "id": "content_alignment",
-        "label": "Content Alignment",
-        "options": [
-          {
-            "value": "left",
-            "label": "Left"
-          }, {
-            "value": "center",
-            "label": "Center"
-          }, {
-            "value": "right",
-            "label": "Right"
-          }
-        ],
-        "default": "center"
-      },
-      {
-        "type": "color_scheme",
-        "id": "color_scheme",
-        "default": "scheme_1",
-        "label": "Color Scheme"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_announcement",
-        "label": "Full Width",
-        "default": true
-      }, {
-        "type": "header",
-        "content": "Padding"
-      }, {
-        "type": "range",
-        "id": "padding_top",
-        "min": 10,
-        "max": 100,
-        "step": 1,
-        "unit": "px",
-        "label": "Padding Top",
-        "default": 16
-      }, {
-        "type": "range",
-        "id": "padding_bottom",
-        "min": 10,
-        "max": 100,
-        "step": 1,
-        "unit": "px",
-        "label": "Padding Bottom",
-        "default": 16
+        "type": "text",
+        "id": "scrolling_text",
+        "label": "Scrolling Text"
       }
     ],
-    "max_blocks": 6,
+    "max_blocks": 5,
     "blocks": [
       {
-        "name": "Sub heading",
-        "type": "subheading",
+        "name": "Image Block",
+        "type": "image_block",
         "settings": [
           {
-            "type": "richtext",
-            "id": "subheading",
-            "label": "Sub heading",
-            "default": "<p>Latest Fashion Demand</p>"
-          }
-        ]
-      },
-      {
-        "name": "Heading",
-        "type": "heading",
-        "settings": [
+            "type": "image_picker",
+            "id": "image_picker",
+            "label": "Select Image"
+          },
           {
             "type": "text",
-            "id": "header",
-            "label": "Header",
-            "default": "Header"
-          }
-        ]
-      },
-      {
-        "name": "Text",
-        "type": "text_block",
-        "settings": [
-          {
-            "type": "richtext",
-            "id": "description",
-            "label": "Text",
-            "default": "<p>Our latest collection of fashion item offers something special for every occasion. Our festival and casual outfits ensure you are prepared for anything.</p>"
-          }
-        ]
-      },
-      {
-        "name": "Before Image",
-        "type": "before_image",
-        "settings": [
-          {
-            "type": "image_picker",
-            "id": "before_image",
-            "label": "Before Image"
-          }
-        ]
-      }, {
-        "name": "After Image",
-        "type": "after_image",
-        "settings": [
-          {
-            "type": "image_picker",
-            "id": "after_image",
-            "label": "After Image"
+            "id": "heading_text",
+            "label": "Title Here"
           }
         ]
       }
     ],
     "presets": [
       {
-        "name": "Rich Text",
+        "name": "Scrolling Image-Text",
         "blocks": [
           {
-            "type": "subheading"
-          },
-          {
-            "type": "heading"
-          },
-          {
-            "type": "text_block"
-          },
-          {
-            "type": "before_image"
-          }, {
-            "type": "after_image"
+            "type": "image_block"
           }
         ]
       }
     ],
     "enabled_on": {
-      "templates": ["*"]
+      "templates": ["*"],
+      "groups": ["footer"]
     }
   }
-{% endschema %}
+  {% endschema %}
+  
